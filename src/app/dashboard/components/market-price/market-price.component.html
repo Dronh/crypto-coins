@@ -1,0 +1,58 @@
+<div fxFill class="markets-container">
+
+  <div fxLayout="row" fxLayoutAlign="space-around stretch">
+    <div class="mat-title" fxFlex="20">
+      <div>
+        <img class="thumb-nail" [src]="coin.icon">
+        <span>{{coin.name}}</span>
+      </div>
+    </div>
+    <div class="mat-body-strong" fxFlex="60">
+      <div fxLayout="row" fxLayoutAlign="space-around stretch">
+        <div fxFlex="50">
+          <span class="stats-label">HIGH &nbsp;</span> {{max | currency:selectedFiat:'symbol-narrow'}}
+        </div>
+        <div fxFlex="50">
+          <span class="stats-label"> AVG &nbsp;&nbsp; </span> {{avg | currency:selectedFiat:'symbol-narrow'}}
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-around stretch">
+        <div fxFlex="50">
+          <span class="stats-label">LOW &nbsp;&nbsp;</span> {{min | currency:selectedFiat:'symbol-narrow'}}
+        </div>
+        <div fxFlex="50"></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="example-element-description table-container">
+    <table mat-table aria-label="Elements" [style.visibility]="!coinMarkets? 'hidden': 'visible'">
+      <!-- Exchange Column -->
+      <ng-container matColumnDef="exchange">
+        <th mat-header-cell *matHeaderCellDef>Exchange</th>
+        <td mat-cell *matCellDef="let row">{{row.exchange}}</td>
+      </ng-container>
+
+      <!-- Pair Column -->
+      <ng-container matColumnDef="pair">
+        <th mat-header-cell *matHeaderCellDef>Pair</th>
+        <td mat-cell *matCellDef="let row">{{row.pair}}</td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="pairPrice">
+        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <td mat-cell *matCellDef="let row">{{row.pairPrice | currency:selectedFiat:'symbol-narrow'}}</td>
+      </ng-container>
+
+      <!-- Volume Column -->
+      <ng-container matColumnDef="volume">
+        <th mat-header-cell *matHeaderCellDef>Volume(24Hr)</th>
+        <td mat-cell *matCellDef="let row">{{row.volume | currency:selectedFiat:'symbol-narrow'}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumn; sticky:true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumn;"></tr>
+    </table>
+  </div>
+</div>

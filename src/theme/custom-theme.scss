@@ -1,0 +1,63 @@
+@use "~@angular/material" as mat;
+
+@include mat.core();
+
+// Light theme
+$custom-light-theme-primary: mat.define-palette(mat.$light-blue-palette, 500);
+$custom-light-theme-accent: mat.define-palette(mat.$indigo-palette, 800);
+$custom-dark-theme-accent: mat.define-palette(mat.$indigo-palette, 400);
+$custom-light-theme-warn: mat.define-palette(mat.$red-palette);
+
+$custom-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $custom-light-theme-primary,
+      accent: $custom-light-theme-accent,
+      warn: $custom-light-theme-warn,
+    ),
+  )
+);
+
+$custom-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $custom-light-theme-primary,
+      accent: $custom-dark-theme-accent,
+      warn: $custom-light-theme-warn,
+    ),
+  )
+);
+
+.theme-dark {
+  @include mat.all-component-themes($custom-dark-theme);
+}
+
+.theme-light {
+  @include mat.all-component-themes($custom-light-theme);
+}
+
+// Scroll bar start
+$custom-grey-theme: mat.define-palette(mat.$blue-grey-palette, 500);
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  overflow-y: scroll;
+  background: mat.get-color-from-palette($custom-grey-theme);
+  box-shadow: inset 0 0 4px mat.get-color-from-palette($custom-grey-theme);
+}
+
+::-webkit-scrollbar-thumb {
+  background: mat.get-color-from-palette($custom-light-theme-primary);
+  border-radius: 10px;
+}
+
+// Scroll bar end
+
+//side-nav active route start
+
+.active-list-item {
+  color: mat.get-color-from-palette($custom-light-theme-primary) !important;
+}
+
+// side-nav active route end

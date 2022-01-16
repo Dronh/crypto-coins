@@ -1,0 +1,51 @@
+.mat-card-content {
+  overflow-x: auto;
+}
+
+th.mat-header-cell {
+  text-align: start !important;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+table td,
+table th {
+  padding: 2px 20px;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  cursor: pointer;
+}
+
+tr.element-row:not(.expanded-row):active {
+  cursor: pointer;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.thumb-nail {
+  width: 32px;
+  vertical-align: middle;
+  padding-right: 8px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.wd-100 {
+  width: 100%;
+}

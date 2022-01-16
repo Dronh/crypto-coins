@@ -1,0 +1,7 @@
+<mat-drawer-container class="mat-typography" class="app-container">
+  <app-bar (switchDarkTheme)='switchMode($event)'></app-bar>
+  <div class="app-body">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
+<app-spinner class="mat-spinner"></app-spinner>

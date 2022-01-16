@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexFill class="mat-headline">
+      <div>
+        <span class="mat-title">Crypto Coins</span>
+      </div>
+      <div class="icon-inline">
+        <button mat-icon-button *ngIf="!isNightModeOn else nightMode" (click)="switchToNightMode(true)">
+          <mat-icon class="material-icons-round">nightlight</mat-icon>
+        </button>
+
+        <ng-template #nightMode>
+          <button mat-icon-button (click)="switchToNightMode(false)">
+            <mat-icon class="material-icons-round">wb_sunny</mat-icon>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>

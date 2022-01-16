@@ -1,0 +1,91 @@
+<div fxLayout="row" fxLayoutAlign="end center" class="mat-body">
+  <div class="mat-title" fxFlex.xs="70" fxFlex.sm="70" fxFlex.md="85" fxFlex.gt-md="85">
+    Global avg prices
+  </div>
+  <mat-form-field fxFlex.xs="30" fxFlex.sm="30" fxFlex.md="15" fxFlex.gt-md="15">
+    <mat-select [(ngModel)]="fiatSelected" (selectionChange)="onFiatSelect($event.value)">
+      <mat-option *ngFor="let fiat of fiatCurrencies" [value]="fiat">
+        {{ fiat.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<mat-divider></mat-divider>
+<mat-card-content>
+  <table mat-table multiTemplateDataRows>
+
+    <!-- Rank Column -->
+    <ng-container matColumnDef="rank">
+      <th mat-header-cell *matHeaderCellDef>Rank</th>
+      <td mat-cell *matCellDef="let row">{{row.rank}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let row">
+        <div><img class="thumb-nail" [src]="row.icon" /> <span>{{row.name}}</span></div>
+      </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let row">{{row.price | currency:fiatSelected.name:'symbol-narrow'}}</td>
+    </ng-container>
+
+    <!-- Market Cap Column -->
+    <ng-container matColumnDef="marketCap">
+      <th mat-header-cell *matHeaderCellDef>Market Cap</th>
+      <td mat-cell *matCellDef="let row">{{row.marketCap | currency:fiatSelected.name:'symbol-narrow'}}</td>
+    </ng-container>
+
+    <!-- Supply Column -->
+    <ng-container matColumnDef="availableSupply">
+      <th mat-header-cell *matHeaderCellDef>Supply</th>
+      <td mat-cell *matCellDef="let row">{{row.availableSupply | numberFormat}}</td>
+    </ng-container>
+
+    <!-- Change Column -->
+    <ng-container matColumnDef="priceChange1d">
+      <th mat-header-cell *matHeaderCellDef>Change (24Hr)</th>
+      <td mat-cell *matCellDef="let row" [ngClass]="(row.priceChange1d >= 0) ? 'green' : 'red'">{{row.priceChange1d}} %
+      </td>
+    </ng-container>
+
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <app-market-price *ngIf="expandedElement" class="wd-100" [coinData]="element" [selectedFiat]="fiatSelected.name"></app-market-price>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row" (click)="$event.stopPropagation();">
+
+        <button *ngIf="row.favorite else unfavourite" mat-icon-button aria-label="favorite" (click)="removeFromFavorites(row.id)">
+          <mat-icon color="primary">favorite</mat-icon>
+        </button>
+        <ng-template #unfavourite>
+          <button  mat-icon-button aria-label="favorite" (click)="addToFavorites(row.id)">
+          <mat-icon color="primary">favorite_border</mat-icon>
+        </button>
+      </ng-template>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="element-row"
+      [class.expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+
+  </table>
+</mat-card-content>

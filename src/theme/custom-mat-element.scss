@@ -1,0 +1,57 @@
+// mat card
+.mat-card {
+  padding: 24px !important;
+  border-radius: 16px !important;
+  max-width: 1440px;
+  margin: auto;
+}
+
+.mat-card-content {
+  padding: 24px 0 24px 0 !important;
+}
+
+// Button
+.mat-raised-button {
+  min-width: 108px !important;
+  padding: 0 24px 0 24px !important;
+}
+
+// mat-toolbar
+.mat-toolbar {
+  border-radius: 0 0 16px 16px;
+}
+.mat-toolbar-row {
+  padding: 0 32px !important;
+}
+
+//mat title
+.mat-title {
+  margin: 24px 0 !important;
+}
+
+//mat-steppr
+.mat-horizontal-content-container {
+  padding: 24px !important;
+}
+
+//mat form field
+.mat-form-field {
+  margin: 16px 0px !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.8em 0;
+}
+
+//spinner
+.mat-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+}
+
+// mat-table
+.mat-table {
+  width: 100%;
+}
